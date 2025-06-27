@@ -1,3 +1,5 @@
+// Substituir o conteúdo de documentos/index.tsx por esse:
+
 import { useEffect, useState } from "react";
 import {
   View,
@@ -201,8 +203,8 @@ const styles = StyleSheet.create({
   card: {
     backgroundColor: "rgba(255, 255, 255, 0.85)",
     padding: 15,
-    borderRadius: 8,
-    marginBottom: 10,
+    borderRadius: 10,
+    marginBottom: 15,
   },
   cardTitle: {
     fontWeight: "bold",
@@ -225,7 +227,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   editButton: {
-    backgroundColor: "#007bff",
+    backgroundColor: "#003366",
     paddingVertical: 8,
     paddingHorizontal: 15,
     borderRadius: 5,
@@ -235,7 +237,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   deleteButton: {
-    backgroundColor: "#dc3545",
+    backgroundColor: "#990000",
     paddingVertical: 8,
     paddingHorizontal: 15,
     borderRadius: 5,

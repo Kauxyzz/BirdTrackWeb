@@ -1,3 +1,5 @@
+// Substituir o conteúdo de monitoramento/index.tsx por esse
+
 import { useEffect, useState } from "react";
 import {
   View,
@@ -117,7 +119,7 @@ export default function MonitoramentoIndex() {
         resizeMode="cover"
       />
       <View style={styles.overlay}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.push("/dashboard")}>
+        <TouchableOpacity style={styles.backButton} onPress={() => router.push("/dashboard")}> 
           <Text style={styles.backButtonText}>← Voltar</Text>
         </TouchableOpacity>
 
@@ -129,55 +131,25 @@ export default function MonitoramentoIndex() {
             <View style={styles.card}>
               {editandoId === item.id ? (
                 <>
-                  <Text style={styles.label}>Data:</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={registroEditado.data}
-                    onChangeText={(text) => setRegistroEditado({ ...registroEditado, data: text })}
-                  />
-                  <Text style={styles.label}>Número da Granja:</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={registroEditado.numeroGranja}
-                    onChangeText={(text) => setRegistroEditado({ ...registroEditado, numeroGranja: text })}
-                  />
-                  <Text style={styles.label}>Mortalidade:</Text>
-                  <TextInput
-                    style={styles.input}
-                    keyboardType="numeric"
-                    value={String(registroEditado.mortalidade)}
-                    onChangeText={(text) =>
-                      setRegistroEditado({ ...registroEditado, mortalidade: Number(text) })
-                    }
-                  />
-                  <Text style={styles.label}>Média de Peso:</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={registroEditado.mediaPeso}
-                    onChangeText={(text) =>
-                      setRegistroEditado({ ...registroEditado, mediaPeso: text })
-                    }
-                  />
-                  <Text style={styles.label}>Status:</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={registroEditado.status}
-                    onChangeText={(text) => setRegistroEditado({ ...registroEditado, status: text })}
-                  />
-                  <Text style={styles.label}>Abate:</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={registroEditado.abate}
-                    onChangeText={(text) => setRegistroEditado({ ...registroEditado, abate: text })}
-                  />
-                  <Text style={styles.label}>Observação:</Text>
-                  <TextInput
-                    style={styles.input}
-                    value={registroEditado.observacao}
-                    onChangeText={(text) =>
-                      setRegistroEditado({ ...registroEditado, observacao: text })
-                    }
-                  />
+                  {Object.entries({
+                    data: "Data",
+                    numeroGranja: "Número da Granja",
+                    mortalidade: "Mortalidade",
+                    mediaPeso: "Média de Peso",
+                    status: "Status",
+                    abate: "Abate",
+                    observacao: "Observação"
+                  }).map(([key, label]) => (
+                    <View key={key}>
+                      <Text style={styles.label}>{label}:</Text>
+                      <TextInput
+                        style={styles.input}
+                        value={String((registroEditado as any)[key] ?? "")}
+                        onChangeText={(text) => setRegistroEditado(prev => ({ ...prev, [key]: text }))}
+                      />
+                    </View>
+                  ))}
+
                   <TouchableOpacity style={styles.editButton} onPress={() => handleSalvar(item.id)}>
                     <Text style={styles.editButtonText}>Salvar</Text>
                   </TouchableOpacity>
@@ -271,7 +243,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   editButton: {
-    backgroundColor: "#007bff",
+    backgroundColor: "#003366",
     paddingVertical: 8,
     paddingHorizontal: 15,
     borderRadius: 5,
@@ -281,7 +253,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   deleteButton: {
-    backgroundColor: "#dc3545",
+    backgroundColor: "#990000",
     paddingVertical: 8,
     paddingHorizontal: 15,
     borderRadius: 5,
