@@ -6,12 +6,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
-  ScrollView,
   ImageBackground,
+  ScrollView,
 } from "react-native";
+import { useRouter } from "expo-router";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "@/firebase/config";
-import { useRouter } from "expo-router";
 
 export default function NovoMonitoramento() {
   const [data] = useState(new Date().toISOString().split("T")[0]);
@@ -52,18 +52,14 @@ export default function NovoMonitoramento() {
         resizeMode="cover"
       />
       <ScrollView contentContainerStyle={styles.overlay}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.replace("/monitoramento")}> 
+        <TouchableOpacity style={styles.backButton} onPress={() => router.replace("/monitoramento")}>
           <Text style={styles.backButtonText}>← Voltar</Text>
         </TouchableOpacity>
 
         <Text style={styles.title}>Novo Registro</Text>
 
-        <View style={styles.form}>
-          <TextInput
-            style={styles.input}
-            value={data}
-            editable={false}
-          />
+        <View style={styles.container}>
+          <TextInput style={styles.input} value={data} editable={false} />
           <TextInput
             style={styles.input}
             placeholder="Mortalidade (quantidade)"
@@ -120,8 +116,10 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   overlay: {
-    padding: 20,
+    flexGrow: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
+    padding: 20,
+    justifyContent: "center",
   },
   title: {
     fontSize: 28,
@@ -130,7 +128,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginBottom: 20,
   },
-  form: {
+  container: {
     backgroundColor: "rgba(255, 255, 255, 0.1)",
     borderRadius: 10,
     padding: 25,
