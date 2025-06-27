@@ -22,6 +22,7 @@ interface Registro {
   status: string;
   abate: string;
   observacao: string;
+  numeroGranja?: string;
 }
 
 export default function MonitoramentoIndex() {
@@ -46,6 +47,7 @@ export default function MonitoramentoIndex() {
             status: data.status ?? "",
             abate: data.abate ?? "",
             observacao: data.observacao ?? "",
+            numeroGranja: data.numeroGranja ?? "",
           });
         });
 
@@ -133,6 +135,12 @@ export default function MonitoramentoIndex() {
                     value={registroEditado.data}
                     onChangeText={(text) => setRegistroEditado({ ...registroEditado, data: text })}
                   />
+                  <Text style={styles.label}>Número da Granja:</Text>
+                  <TextInput
+                    style={styles.input}
+                    value={registroEditado.numeroGranja}
+                    onChangeText={(text) => setRegistroEditado({ ...registroEditado, numeroGranja: text })}
+                  />
                   <Text style={styles.label}>Mortalidade:</Text>
                   <TextInput
                     style={styles.input}
@@ -178,6 +186,8 @@ export default function MonitoramentoIndex() {
                 <>
                   <Text style={styles.label}>Data:</Text>
                   <Text>{item.data}</Text>
+                  <Text style={styles.label}>Número da Granja:</Text>
+                  <Text>{item.numeroGranja}</Text>
                   <Text style={styles.label}>Mortalidade:</Text>
                   <Text>{item.mortalidade}</Text>
                   <Text style={styles.label}>Média de Peso:</Text>

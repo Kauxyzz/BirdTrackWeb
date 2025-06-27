@@ -20,10 +20,11 @@ export default function NovoMonitoramento() {
   const [status, setStatus] = useState("");
   const [abate, setAbate] = useState("");
   const [observacao, setObservacao] = useState("");
+  const [numeroGranja, setNumeroGranja] = useState("");
   const router = useRouter();
 
   const salvarRegistro = async () => {
-    if (!mortalidade || !mediaPeso || !status || !abate) {
+    if (!mortalidade || !mediaPeso || !status || !abate || !numeroGranja) {
       Alert.alert("Erro", "Preencha todos os campos obrigatórios.");
       return;
     }
@@ -36,6 +37,7 @@ export default function NovoMonitoramento() {
         status,
         abate,
         observacao,
+        numeroGranja,
       });
       Alert.alert("Sucesso", "Registro salvo com sucesso!");
       router.replace("/monitoramento");
@@ -52,7 +54,7 @@ export default function NovoMonitoramento() {
         resizeMode="cover"
       />
       <ScrollView contentContainerStyle={styles.overlay}>
-        <TouchableOpacity style={styles.backButton} onPress={() => router.replace("/monitoramento")}>
+        <TouchableOpacity style={styles.backButton} onPress={() => router.replace("/monitoramento")}> 
           <Text style={styles.backButtonText}>← Voltar</Text>
         </TouchableOpacity>
 
@@ -94,6 +96,13 @@ export default function NovoMonitoramento() {
             placeholderTextColor="#ccc"
             value={observacao}
             onChangeText={setObservacao}
+          />
+          <TextInput
+            style={styles.input}
+            placeholder="Número da Granja"
+            placeholderTextColor="#ccc"
+            value={numeroGranja}
+            onChangeText={setNumeroGranja}
           />
           <TouchableOpacity style={styles.button} onPress={salvarRegistro}>
             <Text style={styles.buttonText}>SALVAR REGISTRO</Text>
