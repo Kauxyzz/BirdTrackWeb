@@ -10,17 +10,15 @@ import {
 } from "react-native";
 import { useRouter } from "expo-router";
 import { auth } from "@/firebase/config";
-import { updateEmail, updatePassword } from "firebase/auth";
+import { updatePassword } from "firebase/auth";
 
 export default function Perfil() {
   const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const router = useRouter();
 
   const handleAtualizarPerfil = async () => {
     try {
-      if (email) await updateEmail(auth.currentUser!, email);
       if (senha) await updatePassword(auth.currentUser!, senha);
       Alert.alert("Sucesso", "Perfil atualizado com sucesso!");
     } catch (error) {
@@ -56,14 +54,6 @@ export default function Perfil() {
           placeholderTextColor="#ccc"
           value={nome}
           onChangeText={setNome}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Novo e-mail"
-          placeholderTextColor="#ccc"
-          keyboardType="email-address"
-          value={email}
-          onChangeText={setEmail}
         />
         <TextInput
           style={styles.input}
