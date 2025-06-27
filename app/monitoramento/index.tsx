@@ -8,6 +8,7 @@ import {
   StyleSheet,
   ImageBackground,
   Alert,
+  Platform,
 } from "react-native";
 import { useRouter } from "expo-router";
 import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
@@ -58,25 +59,33 @@ export default function MonitoramentoIndex() {
   }, []);
 
   const handleDelete = (id: string) => {
-    Alert.alert(
-      "Excluir Registro",
-      "Você tem certeza que deseja excluir este registro?",
-      [
-        { text: "Cancelar", style: "cancel" },
-        {
-          text: "Sim",
-          onPress: async () => {
-            try {
-              await deleteDoc(doc(db, "monitoramento", id));
-              setRegistros((prev) => prev.filter((registro) => registro.id !== id));
-            } catch (error) {
-              console.error("Erro ao excluir registro:", error);
-            }
+    if (Platform.OS === "web") {
+      const confirmed = window.confirm("Você tem certeza que deseja excluir este registro?");
+      if (!confirmed) return;
+      deleteDoc(doc(db, "monitoramento", id))
+        .then(() => setRegistros((prev) => prev.filter((registro) => registro.id !== id)))
+        .catch((err) => console.error("Erro ao excluir registro:", err));
+    } else {
+      Alert.alert(
+        "Excluir Registro",
+        "Você tem certeza que deseja excluir este registro?",
+        [
+          { text: "Cancelar", style: "cancel" },
+          {
+            text: "Sim",
+            onPress: async () => {
+              try {
+                await deleteDoc(doc(db, "monitoramento", id));
+                setRegistros((prev) => prev.filter((registro) => registro.id !== id));
+              } catch (error) {
+                console.error("Erro ao excluir registro:", error);
+              }
+            },
           },
-        },
-      ],
-      { cancelable: true }
-    );
+        ],
+        { cancelable: true }
+      );
+    }
   };
 
   const handleSalvar = async (id: string) => {
