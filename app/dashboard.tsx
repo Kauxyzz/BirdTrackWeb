@@ -21,60 +21,58 @@ export default function Dashboard() {
         source={require("@/assets/images/FundoLogin.png")}
         style={styles.background}
         resizeMode="cover"
-      />
-      <View style={styles.overlay}>
-        <View style={styles.container}>
-          <Text style={styles.title}>Gestão Avícola</Text>
+      >
+        <View style={styles.overlay}>
+          <View style={styles.container}>
+            <Text style={styles.title}>Gestão Avícola</Text>
 
-          <Link href="/documentos" asChild>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Documentos</Text>
+            <Link href="/documentos" asChild>
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Documentos</Text>
+              </TouchableOpacity>
+            </Link>
+
+            <Link href="/monitoramento" asChild>
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Monitoramento de Produção</Text>
+              </TouchableOpacity>
+            </Link>
+
+            <Link href="/perfil" asChild>
+              <TouchableOpacity style={styles.button}>
+                <Text style={styles.buttonText}>Alterar Perfil</Text>
+              </TouchableOpacity>
+            </Link>
+
+            <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
+              <Text style={styles.logoutButtonText}>Sair da Conta</Text>
             </TouchableOpacity>
-          </Link>
-
-          <Link href="/monitoramento" asChild>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Monitoramento de Produção</Text>
-            </TouchableOpacity>
-          </Link>
-
-          <Link href="/perfil" asChild>
-            <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>Alterar Perfil</Text>
-            </TouchableOpacity>
-          </Link>
-
-          <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-            <Text style={styles.logoutButtonText}>Sair da Conta</Text>
-          </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      </ImageBackground>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   background: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
+    flex: 1,
     width: "100%",
     height: "100%",
-    zIndex: -1,
   },
   overlay: {
     flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    padding: 20,
+    paddingHorizontal: 20,
   },
   container: {
-    backgroundColor: "rgba(255, 255, 255, 0.1)",
-    borderRadius: 10,
+    width: "100%",
+    maxWidth: 400,
+    backgroundColor: "rgba(255,255,255,0.1)",
     padding: 30,
+    borderRadius: 12,
     alignItems: "center",
   },
   title: {
@@ -86,22 +84,23 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#003366",
     paddingVertical: 14,
-    paddingHorizontal: 35,
     borderRadius: 8,
     marginBottom: 15,
+    width: "100%",
+    alignItems: "center",
   },
   buttonText: {
     color: "#fff",
     fontWeight: "bold",
     fontSize: 16,
-    textAlign: "center",
   },
   logoutButton: {
-    marginTop: 20,
-    backgroundColor: "#660000",
-    paddingVertical: 12,
-    paddingHorizontal: 25,
+    backgroundColor: "#990000",
+    paddingVertical: 14,
     borderRadius: 8,
+    marginTop: 10,
+    width: "100%",
+    alignItems: "center",
   },
   logoutButtonText: {
     color: "#fff",
